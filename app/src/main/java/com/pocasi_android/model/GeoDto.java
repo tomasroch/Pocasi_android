@@ -1,6 +1,6 @@
 package com.pocasi_android.model;
 
-public class GeoModel {
+public class GeoDto {
 
     private Double latitude;
     private Double longitude;
@@ -28,7 +28,9 @@ public class GeoModel {
 
     private String locality;
 
-    public GeoModel() {    }
+    private LocalityInfo localityInfo;
+
+    public GeoDto() {    }
 
     public Double getLatitude() {
         return latitude;
@@ -140,5 +142,13 @@ public class GeoModel {
 
     public void setLocality(String locality) {
         this.locality = locality;
+    }
+
+    public LocalityInfo getLocalityInfo() {
+        return localityInfo;
+    }
+
+    public void setLocalityInfo(LocalityInfo localityInfo) {
+        this.localityInfo = localityInfo;
     }
 }
