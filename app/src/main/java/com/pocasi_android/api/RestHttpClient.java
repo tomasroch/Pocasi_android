@@ -10,14 +10,12 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RestHttpClient {
 
-    //TODO přidat někam do properties
-    private static final String BASE_URL = "https://api.bigdatacloud.net/";
 
     private static Gson gson = new GsonBuilder()
             .setLenient()
             .create();
     private static Retrofit.Builder builder = new Retrofit.Builder()
-            .baseUrl(BASE_URL)
+            .baseUrl("https://api.openweathermap.org/")
             .addConverterFactory(GsonConverterFactory.create(gson));
 
     private static Retrofit retrofit = builder.build();
