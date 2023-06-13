@@ -1,9 +1,12 @@
 package com.pocasi_android.api;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import com.pocasi_android.model.WeatherDto;
 import retrofit2.Call;
 
 import java.io.IOException;
+import java.net.URL;
 
 public class OpenWeatherServiceImpl {
     //TODO udělat tyhle stringy z properties
@@ -23,6 +26,17 @@ public class OpenWeatherServiceImpl {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public Bitmap getWeatherIcon(String icon){
+        Bitmap mIcon11 = null;
+        try {
+            mIcon11 = BitmapFactory.decodeStream(new URL("https://openweathermap.org/img/wn/"+ icon +"@2x.png").openConnection().getInputStream());
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        return mIcon11;
     }
 
 

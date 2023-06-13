@@ -1,18 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".MainActivity">
-    <TextView
+        android:background="@drawable/main_header_selector">
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+
+            tools:context=".MainActivity" android:id="@+id/mainLayout">
+        <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="150dp" tools:srcCompat="@tools:sample/avatars"
+                android:layout_gravity="center_horizontal"
+                android:id="@+id/pocasiImageView"
+                android:layout_marginTop="0dp"/>
+        <TextView
+                android:text="TextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:id="@+id/teploMainTextView"
+                android:gravity="center_horizontal"
+                android:layout_marginTop="50dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display2"/>
+        <TextView
+                android:text="TextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:id="@+id/popisPocasiTextView"
+                android:gravity="center_horizontal"
+                android:layout_marginTop="30dp" android:textAppearance="@style/TextAppearance.AppCompat.Display1"/>
+        <TextView
+                android:text="TextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:id="@+id/cityTextView"
+                android:gravity="center_horizontal"
+                android:layout_marginTop="30dp" android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center|bottom">
+            <Button
+                    android:text="Seznam"
+                    android:layout_width="350dp"
+                    android:layout_height="80dp" android:id="@+id/buttonSeznam"
+                    android:layout_marginBottom="10dp"
+                    style="@style/Widget.MaterialComponents.Button" android:backgroundTint="#00CED1"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <ProgressBar
+            android:id="@+id/progressBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Hello World!"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+            android:maxHeight="200dip"
+            android:minHeight="200dip"
+            android:minWidth="200dip"
+            android:maxWidth="200dip"
+            android:layout_centerInParent="true"/>
+</RelativeLayout>
