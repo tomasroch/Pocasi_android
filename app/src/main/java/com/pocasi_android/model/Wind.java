@@ -1,22 +1,22 @@
 package com.pocasi_android.model;
 
 public class Wind {
-    public double speed;
-    public int deg;
+    private Double speed;
+    private Integer deg;
     public Wind() {    }
-    public double getSpeed() {
+    public Double getSpeed() {
         return speed;
     }
 
-    public void setSpeed(double speed) {
+    public void setSpeed(Double speed) {
         this.speed = speed;
     }
 
-    public int getDeg() {
+    public Integer getDeg() {
         return deg;
     }
 
-    public void setDeg(int deg) {
+    public void setDeg(Integer deg) {
         this.deg = deg;
     }
 }

@@ -1,27 +1,27 @@
 package com.pocasi_android.model;
 
 public class Sys{
-    public int type;
-    public int id;
-    public String country;
-    public int sunrise;
-    public int sunset;
+    private Integer type;
+    private Integer id;
+    private String country;
+    private Integer sunrise;
+    private Integer sunset;
 
     public Sys() {    }
 
-    public int getType() {
+    public Integer getType() {
         return type;
     }
 
-    public void setType(int type) {
+    public void setType(Integer type) {
         this.type = type;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -33,19 +33,19 @@ public class Sys{
         this.country = country;
     }
 
-    public int getSunrise() {
+    public Integer getSunrise() {
         return sunrise;
     }
 
-    public void setSunrise(int sunrise) {
+    public void setSunrise(Integer sunrise) {
         this.sunrise = sunrise;
     }
 
-    public int getSunset() {
+    public Integer getSunset() {
         return sunset;
     }
 
-    public void setSunset(int sunset) {
+    public void setSunset(Integer sunset) {
         this.sunset = sunset;
     }
 }

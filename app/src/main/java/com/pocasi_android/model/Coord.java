@@ -1,24 +1,24 @@
 package com.pocasi_android.model;
 
 public class Coord{
-    public double lon;
-    public double lat;
+    private Double lon;
+    private Double lat;
 
     public Coord() {    }
 
-    public double getLon() {
+    public Double getLon() {
         return lon;
     }
 
-    public void setLon(double lon) {
+    public void setLon(Double lon) {
         this.lon = lon;
     }
 
-    public double getLat() {
+    public Double getLat() {
         return lat;
     }
 
-    public void setLat(double lat) {
+    public void setLat(Double lat) {
         this.lat = lat;
     }
 }

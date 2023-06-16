@@ -1,15 +1,15 @@
 package com.pocasi_android.model;
 
 public class Clouds{
-    public int all;
+    private Integer all;
 
     public Clouds() {    }
 
-    public int getAll() {
+    public Integer getAll() {
         return all;
     }
 
-    public void setAll(int all) {
+    public void setAll(Integer all) {
         this.all = all;
     }
 }

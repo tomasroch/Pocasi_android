@@ -1,18 +1,18 @@
 package com.pocasi_android.model;
 
 public class Weather{
-    public int id;
-    public String main;
-    public String description;
-    public String icon;
+    private Integer id;
+    private String main;
+    private String description;
+    private String icon;
 
     public Weather() {    }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

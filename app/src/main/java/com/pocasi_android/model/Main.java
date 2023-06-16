@@ -1,60 +1,60 @@
 package com.pocasi_android.model;
 
 public class Main{
-    public double temp;
-    public double feels_like;
-    public double temp_min;
-    public double temp_max;
-    public int pressure;
-    public int humidity;
+    public Double temp;
+    public Double feels_like;
+    public Double temp_min;
+    public Double temp_max;
+    public Integer pressure;
+    public Integer humidity;
 
     public Main() {    }
 
-    public double getTemp() {
+    public Double getTemp() {
         return temp;
     }
 
-    public void setTemp(double temp) {
+    public void setTemp(Double temp) {
         this.temp = temp;
     }
 
-    public double getFeels_like() {
+    public Double getFeels_like() {
         return feels_like;
     }
 
-    public void setFeels_like(double feels_like) {
+    public void setFeels_like(Double feels_like) {
         this.feels_like = feels_like;
     }
 
-    public double getTemp_min() {
+    public Double getTemp_min() {
         return temp_min;
     }
 
-    public void setTemp_min(double temp_min) {
+    public void setTemp_min(Double temp_min) {
         this.temp_min = temp_min;
     }
 
-    public double getTemp_max() {
+    public Double getTemp_max() {
         return temp_max;
     }
 
-    public void setTemp_max(double temp_max) {
+    public void setTemp_max(Double temp_max) {
         this.temp_max = temp_max;
     }
 
-    public int getPressure() {
+    public Integer getPressure() {
         return pressure;
     }
 
-    public void setPressure(int pressure) {
+    public void setPressure(Integer pressure) {
         this.pressure = pressure;
     }
 
-    public int getHumidity() {
+    public Integer getHumidity() {
         return humidity;
     }
 
-    public void setHumidity(int humidity) {
+    public void setHumidity(Integer humidity) {
         this.humidity = humidity;
     }
 }
