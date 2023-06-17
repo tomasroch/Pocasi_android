@@ -43,7 +43,9 @@
                 android:gravity="center|bottom">
             <Button
                     android:text="Seznam"
-                    android:layout_width="350dp"
+                    android:layout_width="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
                     android:layout_height="80dp" android:id="@+id/buttonSeznam"
                     android:layout_marginBottom="10dp"
                     style="@style/Widget.MaterialComponents.Button" android:backgroundTint="#00CED1"/>

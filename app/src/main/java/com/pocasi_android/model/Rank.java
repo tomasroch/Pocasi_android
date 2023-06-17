@@ -2,8 +2,8 @@ package com.pocasi_android.model;
 
 public class Rank{
     public Double importance;
-    public Integer confidence;
-    public Integer confidence_city_level;
+    public Double confidence;
+    public Double confidence_city_level;
     public String match_type;
 
     public Rank() {
@@ -17,19 +17,19 @@ public class Rank{
         this.importance = importance;
     }
 
-    public Integer getConfidence() {
+    public Double getConfidence() {
         return confidence;
     }
 
-    public void setConfidence(Integer confidence) {
+    public void setConfidence(Double confidence) {
         this.confidence = confidence;
     }
 
-    public Integer getConfidence_city_level() {
+    public Double getConfidence_city_level() {
         return confidence_city_level;
     }
 
-    public void setConfidence_city_level(Integer confidence_city_level) {
+    public void setConfidence_city_level(Double confidence_city_level) {
         this.confidence_city_level = confidence_city_level;
     }
 

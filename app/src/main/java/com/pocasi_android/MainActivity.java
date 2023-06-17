@@ -1,7 +1,7 @@
 package com.pocasi_android;
 
-import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.location.Location;
@@ -13,11 +13,12 @@ import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.core.app.ActivityCompat;
-import com.pocasi_android.api.GeoService;
+import com.pocasi_android.activity.SeznamActivity;
+import com.pocasi_android.api.AutoCompleteServiceImpl;
 import com.pocasi_android.api.GeoServiceImpl;
 import com.pocasi_android.api.OpenWeatherServiceImpl;
-import com.pocasi_android.api.RestHttpClient;
 import com.pocasi_android.enums.Language;
+import com.pocasi_android.model.AutoCompleteDto;
 import com.pocasi_android.model.GeoDto;
 import com.pocasi_android.model.WeatherDto;
 import org.apache.commons.lang3.StringUtils;
@@ -27,7 +28,7 @@ import java.util.concurrent.Executors;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Language language = Language.CS;
+    private final Language language = Language.CS;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,7 +67,6 @@ public class MainActivity extends AppCompatActivity {
                 location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
             }
 
-
             GeoDto geoDto = geoService.getGeoInformation(location.getLatitude(),location.getLongitude(), language.name());
             WeatherDto weatherDto = openWeatherService.getBasicWeather(location.getLatitude(),location.getLongitude(), language.getAlternativeName());
             Bitmap icon = openWeatherService.getWeatherIcon(weatherDto.getWeather().get(0).getIcon());
@@ -78,6 +78,16 @@ public class MainActivity extends AppCompatActivity {
                 textViewCity.setText(geoDto.getCity());
                 progressBar.setVisibility(View.GONE);
             });
+        });
+
+        Button seznam = findViewById(R.id.buttonSeznam);
+        seznam.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, SeznamActivity.class);
+                intent.putExtra("language", language.name());
+                startActivity(intent);
+            }
         });
 
     }
