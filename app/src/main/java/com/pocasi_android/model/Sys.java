@@ -4,8 +4,8 @@ public class Sys{
     private Integer type;
     private Integer id;
     private String country;
-    private Integer sunrise;
-    private Integer sunset;
+    private Long sunrise;
+    private Long sunset;
 
     public Sys() {    }
 
@@ -33,19 +33,19 @@ public class Sys{
         this.country = country;
     }
 
-    public Integer getSunrise() {
+    public Long getSunrise() {
         return sunrise;
     }
 
-    public void setSunrise(Integer sunrise) {
+    public void setSunrise(Long sunrise) {
         this.sunrise = sunrise;
     }
 
-    public Integer getSunset() {
+    public Long getSunset() {
         return sunset;
     }
 
-    public void setSunset(Integer sunset) {
+    public void setSunset(Long sunset) {
         this.sunset = sunset;
     }
 }

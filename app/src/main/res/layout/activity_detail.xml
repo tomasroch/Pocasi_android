@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".activity.DetailActivity">
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+
+            tools:context=".MainActivity" android:id="@+id/mainLayout">
+        <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="150dp" tools:srcCompat="@tools:sample/avatars"
+                android:layout_gravity="center_horizontal"
+                android:id="@+id/pocasiImgView"
+                android:layout_marginTop="0dp"/>
+        <TextView
+                android:text=""
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:id="@+id/mistoTxt"
+                android:gravity="left"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="50dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+        <TextView
+                android:text=""
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:id="@+id/pocasiTxt"
+                android:layout_marginLeft="5dp"
+                android:gravity="left"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+        <TextView
+                android:text=""
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:id="@+id/aktualniTeplotaTxt"
+                android:layout_marginLeft="5dp"
+                android:gravity="left"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+        <TextView
+                android:text=""
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:id="@+id/pocitovaTeplotaTxt"
+                android:layout_marginLeft="5dp"
+                android:gravity="left"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+        <TextView
+                android:text=""
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:id="@+id/minimalniTeplotaTxt"
+                android:layout_marginLeft="5dp"
+                android:gravity="left"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+        <TextView
+                android:text=""
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:id="@+id/maximalniTeplotaTxt"
+                android:layout_marginLeft="5dp"
+                android:gravity="left"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+        <TextView
+                android:text=""
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:id="@+id/vlhkostTxt"
+                android:layout_marginLeft="5dp"
+                android:gravity="left"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+        <TextView
+                android:text=""
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:id="@+id/rychlostVetruTxt"
+                android:layout_marginLeft="5dp"
+                android:gravity="left"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+        <TextView
+                android:text=""
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:id="@+id/tlakTxt"
+                android:layout_marginLeft="5dp"
+                android:gravity="left"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+        <TextView
+                android:text=""
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:id="@+id/viditelnostTxt"
+                android:layout_marginLeft="5dp"
+                android:gravity="left"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+        <TextView
+                android:text=""
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:id="@+id/vychodSlunceTxt"
+                android:layout_marginLeft="5dp"
+                android:gravity="left"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+        <TextView
+                android:text=""
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:id="@+id/zapadSlunceTxt"
+                android:layout_marginLeft="5dp"
+                android:gravity="left"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center|bottom">
+            <Button
+                    android:text="Smazat ze seznamu"
+                    android:layout_width="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_height="80dp" android:id="@+id/buttonSmazat"
+                    android:layout_marginBottom="10dp"
+                    style="@style/Widget.MaterialComponents.Button" android:backgroundTint="#F44336"/>
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>

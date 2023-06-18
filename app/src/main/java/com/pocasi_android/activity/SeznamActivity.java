@@ -1,13 +1,21 @@
 package com.pocasi_android.activity;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.*;
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import com.pocasi_android.R;
 import com.pocasi_android.api.AutoCompleteServiceImpl;
@@ -41,6 +49,9 @@ public class SeznamActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_seznam);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        dbManager = new DBManager(this);
+        dbManager.open();
         language = Language.valueOf(getIntent().getStringExtra("language"));
         AutoCompleteTextView autoCompleteView = findViewById(R.id.autoCompleteTextView);
         Button addButton = findViewById(R.id.buttonAdd);
@@ -106,9 +117,7 @@ public class SeznamActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Properties property = cityStore.get(autoCompleteView.getText().toString());
-                dbManager.open();
                 dbManager.insert(property.getCity(), property.getLon(), property.getLat());
-                dbManager.close();
                 refreshData();
                 autoCompleteView.setText("");
             }
@@ -116,24 +125,40 @@ public class SeznamActivity extends AppCompatActivity {
     }
 
     private void initData() {
-        dbManager = new DBManager(this);
-        dbManager.open();
         Cursor cursor = dbManager.fetch();
-        dbManager.close();
         ListView listView = findViewById(R.id.seznamListView);
         adapter = new SimpleCursorAdapter(this, android.R.layout.simple_list_item_2, cursor, from2, to2, 0);
         adapter.notifyDataSetChanged();
         listView.setAdapter(adapter);
 
+
+        ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                new ActivityResultCallback<ActivityResult>() {
+                    @Override
+                    public void onActivityResult(ActivityResult result) {
+                        refreshData();
+                    }
+                });
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                System.out.println(i);
+                Cursor cursor = dbManager.fetch();
                 cursor.moveToPosition(i);
                 int id = cursor.getInt(0);
                 String city = cursor.getString(1);
                 String longitude = cursor.getString(2);
                 String latitude = cursor.getString(3);
+
+                Intent intent = new Intent(SeznamActivity.this, DetailActivity.class);
+                intent.putExtra("language", language.name());
+                intent.putExtra("id", id);
+                intent.putExtra("city", city);
+                intent.putExtra("longitude", longitude);
+                intent.putExtra("latitude", latitude);
+
+
+                activityResultLauncher.launch(intent);
             }
         });
     }
@@ -145,8 +170,6 @@ public class SeznamActivity extends AppCompatActivity {
         executor.execute(() -> {
             //Background work here
             OpenWeatherServiceImpl openWeatherService = new OpenWeatherServiceImpl();
-            dbManager = new DBManager(this);
-            dbManager.open();
             Cursor cursor = dbManager.fetch();
             cursor.moveToPosition(-1);
             while (cursor.moveToNext()) {
@@ -157,7 +180,6 @@ public class SeznamActivity extends AppCompatActivity {
                 dbManager.update(id, String.format("%s°", Math.round(weatherDto.getMain().getTemp())), Calendar.getInstance().getTime().toString());
             }
             Cursor finalCursor = dbManager.fetch();
-            dbManager.close();
 
             handler.post(() -> {
                 ListView listView = findViewById(R.id.seznamListView);
@@ -167,6 +189,17 @@ public class SeznamActivity extends AppCompatActivity {
             });
         });
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                dbManager.close();
+                this.finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 }
