@@ -25,5 +25,8 @@
                 android:enabled="false"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" android:id="@+id/buttonAdd"/>
+        <ListView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" android:id="@+id/seznamListView"/>
     </LinearLayout>
 </RelativeLayout>

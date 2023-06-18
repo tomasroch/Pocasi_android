@@ -6,19 +6,17 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.location.Location;
 import android.location.LocationManager;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.view.View;
 import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
-import android.os.Bundle;
 import androidx.core.app.ActivityCompat;
 import com.pocasi_android.activity.SeznamActivity;
-import com.pocasi_android.api.AutoCompleteServiceImpl;
 import com.pocasi_android.api.GeoServiceImpl;
 import com.pocasi_android.api.OpenWeatherServiceImpl;
 import com.pocasi_android.enums.Language;
-import com.pocasi_android.model.AutoCompleteDto;
 import com.pocasi_android.model.GeoDto;
 import com.pocasi_android.model.WeatherDto;
 import org.apache.commons.lang3.StringUtils;
@@ -35,50 +33,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //init
-        TextView textViewTeplota = findViewById(R.id.teploMainTextView);
-        textViewTeplota.setText("");
-        TextView textViewPopis = findViewById(R.id.popisPocasiTextView);
-        textViewPopis.setText("");
-        TextView textViewCity = findViewById(R.id.cityTextView);
-        textViewCity.setText("");
 
-        ProgressBar progressBar = findViewById(R.id.progressBar);
-
-        // check and grant permission
-        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-                && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(MainActivity.this,
-                    new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION, android.Manifest.permission.ACCESS_COARSE_LOCATION},1);
-            return;
-        }
-
-        // handle data
-        ExecutorService executor = Executors.newSingleThreadExecutor();
-        Handler handler = new Handler(Looper.getMainLooper());
-
-        executor.execute(() -> {
-            //Background work here
-            LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-            GeoServiceImpl geoService = new GeoServiceImpl();
-            OpenWeatherServiceImpl openWeatherService = new OpenWeatherServiceImpl();
-
-            Location location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-            if (location == null){
-                location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-            }
-
-            GeoDto geoDto = geoService.getGeoInformation(location.getLatitude(),location.getLongitude(), language.name());
-            WeatherDto weatherDto = openWeatherService.getBasicWeather(location.getLatitude(),location.getLongitude(), language.getAlternativeName());
-            Bitmap icon = openWeatherService.getWeatherIcon(weatherDto.getWeather().get(0).getIcon());
-            handler.post(() -> {
-                ImageView imageView = findViewById(R.id.pocasiImageView);
-                imageView.setImageBitmap(icon);
-                textViewTeplota.setText(String.format("%s°", Math.round(weatherDto.getMain().getTemp())));
-                textViewPopis.setText(StringUtils.capitalize(weatherDto.getWeather().get(0).getDescription()));
-                textViewCity.setText(geoDto.getCity());
-                progressBar.setVisibility(View.GONE);
-            });
-        });
+        refreshData();
 
         Button seznam = findViewById(R.id.buttonSeznam);
         seznam.setOnClickListener(new View.OnClickListener() {
@@ -112,6 +68,50 @@ public class MainActivity extends AppCompatActivity {
         thread.start();
     }
 
+    private void refreshData(){
+        Button buttonSeznam = findViewById(R.id.buttonSeznam);
+        // check and grant permission
+        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(MainActivity.this,
+                    new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION, android.Manifest.permission.ACCESS_COARSE_LOCATION},1);
+            buttonSeznam.setEnabled(false);
+            return;
+        }
+
+        // handle data
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+        Handler handler = new Handler(Looper.getMainLooper());
+
+        executor.execute(() -> {
+            //Background work here
+            LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+            GeoServiceImpl geoService = new GeoServiceImpl();
+            OpenWeatherServiceImpl openWeatherService = new OpenWeatherServiceImpl();
+
+            Location location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+            if (location == null){
+                location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            }
+
+            GeoDto geoDto = geoService.getGeoInformation(location.getLatitude(),location.getLongitude(), language.name());
+            WeatherDto weatherDto = openWeatherService.getBasicWeather(location.getLatitude(),location.getLongitude(), language.getAlternativeName());
+            Bitmap icon = openWeatherService.getWeatherIcon(weatherDto.getWeather().get(0).getIcon());
+            TextView textViewTeplota = findViewById(R.id.teploMainTextView);
+            TextView textViewPopis = findViewById(R.id.popisPocasiTextView);
+            TextView textViewCity = findViewById(R.id.cityTextView);
+            ProgressBar progressBar = findViewById(R.id.progressBar);
+            handler.post(() -> {
+                ImageView imageView = findViewById(R.id.pocasiImageView);
+                imageView.setImageBitmap(icon);
+                textViewTeplota.setText(String.format("%s°", Math.round(weatherDto.getMain().getTemp())));
+                textViewPopis.setText(StringUtils.capitalize(weatherDto.getWeather().get(0).getDescription()));
+                textViewCity.setText(geoDto.getCity());
+                progressBar.setVisibility(View.GONE);
+            });
+        });
+    }
+
     @Override public void onRequestPermissionsResult(int requestCode,
                                                      String permissions[], int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -121,6 +121,9 @@ public class MainActivity extends AppCompatActivity {
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     Toast.makeText(MainActivity.this, "Permissions granted", Toast.LENGTH_SHORT).show();
+                    Button buttonSeznam = findViewById(R.id.buttonSeznam);
+                    buttonSeznam.setEnabled(true);
+                    refreshData();
                     // permission was granted, yay! Do the
                     // contacts-related task you need to do.
                 } else {

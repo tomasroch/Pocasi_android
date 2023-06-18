@@ -18,20 +18,20 @@
                 android:id="@+id/pocasiImageView"
                 android:layout_marginTop="0dp"/>
         <TextView
-                android:text="TextView"
+                android:text=""
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" android:id="@+id/teploMainTextView"
                 android:gravity="center_horizontal"
                 android:layout_marginTop="50dp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display2"/>
         <TextView
-                android:text="TextView"
+                android:text=""
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" android:id="@+id/popisPocasiTextView"
                 android:gravity="center_horizontal"
                 android:layout_marginTop="30dp" android:textAppearance="@style/TextAppearance.AppCompat.Display1"/>
         <TextView
-                android:text="TextView"
+                android:text=""
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" android:id="@+id/cityTextView"
                 android:gravity="center_horizontal"
