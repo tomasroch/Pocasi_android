@@ -79,6 +79,7 @@ public class SeznamActivity extends AppCompatActivity {
                 if (autoCompleteView.isPerformingCompletion()) {
                     // An item has been selected from the list. Ignore.
                 } else {
+                    cityStore.clear();
                     if (i + i2 >= 3) {
                         // handle data
                         ExecutorService executor = Executors.newSingleThreadExecutor();
